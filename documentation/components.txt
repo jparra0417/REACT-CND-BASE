@@ -1,0 +1,49 @@
+                
+Components
+- each part of a UI
+- reusable
+- component can have more Components
+- they are in a javascript file
+- we create a folder called components/ and the components will be nested inside there
+
+Types
+- stateless functional
+    - javascript functions
+        - example: function welcome(props){ return return <h1>Hello, {this.props.name}</h1>; }
+
+    - functional Components
+        - it is a javascript function
+        - receive a parameter called props
+        - return  a html (JSX)
+        - example:
+            - Create a file called Greet.js in components/
+                import React from 'react';
+                function Greet(){
+                    return <h1>Welcome to CND!</h1>;
+                }
+                // const Greet = () => 
+                export default Greet;
+            - Add the component in App.js
+                import React from 'react';
+                import './App.css';
+                import Greet from './components/Greet'
+                function App() {
+                    return (
+                        <div className="App">
+                        <Greet/>
+                        </div>
+                    );
+                }
+                export default App;
+
+
+
+- stateful
+    - class etending component class
+    - render method returning HTML example
+        class Welcome extends React.Component {
+            render(){
+                return <h1>Hello, {this.props.name}</h1>;
+            }
+        }
+

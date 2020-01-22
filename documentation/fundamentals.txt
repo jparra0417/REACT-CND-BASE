@@ -34,5 +34,3 @@ Folder structure
             - classes that are implemented in the app
         - logo.svg
             default logo
-                
-
