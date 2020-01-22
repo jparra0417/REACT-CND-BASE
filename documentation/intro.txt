@@ -1,0 +1,46 @@
+REACT
+Concepts
+What is react?
+    - open source library for building user interfacces
+    - javascript library
+    - Focus on UI
+    - Rich ecosystem
+
+Why learn react?
+    - created and maintained by facebook
+    - more than 100k starts on github
+    - huge community
+    - In demand skillset
+
+Component base architecture
+    - small encapsulated parts which can then be composed to make more complex UIs
+    - components could have reusable code
+
+React is declarative
+    - Tell react what you want and react will build the actual UI
+    - declarative paradigm
+        - draw a landscape, 
+            - an artist draw everything
+        - create complex UI by abstracting away the difficult parts
+
+- imperative paradigm
+    - draw a landscape
+        - child we have to say draw the mountains, the background, ecosystem
+    - we have the control of the flow
+
+- React will handle efficiently updating and rendering of the components
+- DOM updates are handles gracefully in React
+
+More on why react?
+    - portion of your page or complete application
+    - react native for mobile applications
+
+
+Prerequisites
+    - HTML, CSS and javascript
+    - ES6 - this, filter, map and reduce
+        - let const, arrow functions, templates literals, default parameters, object literals, rest and spread operators
+
+
+
+

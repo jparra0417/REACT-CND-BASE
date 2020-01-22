@@ -1,0 +1,38 @@
+Requirements
+    - text editor
+    - node
+
+Create React app
+    > npx create-react-app [name of project]
+        - npx is a package that we get when we install nodejs 
+        - install the create-react-app globally and after create the package
+
+Run the project
+    >npm start
+
+Folder structure
+    - package.json 
+        it contains the definition of dependencies and scripts for the react project
+    - node_modules
+        it contains all dependencies
+    - public
+        - manifest.json
+        - favicon.ico
+        - index.html
+            - is the only html we have in the app, it is a single page app
+            - we dont need to change anything in this file
+            - div id="root" contains the UI
+    -src
+        - we develop
+        - index.js
+            - Specified the root component App
+            - And the DOM element which will be controlled by react
+            - the element with id=root   will be controlled by react
+        - App.js
+            - the view we see in the browser
+        - App.css
+            - classes that are implemented in the app
+        - logo.svg
+            default logo
+                
+
