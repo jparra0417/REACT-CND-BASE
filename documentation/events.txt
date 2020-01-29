@@ -1,0 +1,38 @@
+events
+
+The events in react use camel case
+in funtional
+onClick={eventHandle}
+in class
+onClick={this.eventHandle}
+
+Binding events
+
+Whe we try to execute some operations by firing an event in html, we cannot access to the variables of the component for example
+
+constructor(props){ super(props); this.state={message: 'Hello'} }
+render() { return (<div><button onClick={this.clickHandler}>{this.state.message}</button></div>)}
+clickHandler() { this.setState({ message: 'Good bye'}) }
+
+it provokes an error because the value of 'this' is undefined and we have not binded the event with a function
+There are 4 aprroaches to bind event:
+
+1) in the event bind the function, we use {callme.bind(this)}
+    constructor(props){ super(props); this.state={message: 'Hello'} }
+    render() { return (<div><button onClick={this.clickHandler.bind(this)}>{this.state.message}</button></div>)}
+    clickHandler() { this.setState({ message: 'Good bye'}) }
+
+2) create an anonymous function in the event, {() => callme()}
+    constructor(props){ super(props); this.state={message: 'Hello'} }
+    render() { return (<div><button onClick={() =>this.clickHandler}>{this.state.message}</button></div>)}
+    clickHandler() { this.setState({ message: 'Good bye'}) }
+
+3) bind the event in the constructor, this is that React advises
+    constructor(props){ super(props); this.state={message: 'Hello'}; this.clickHandler = this.clickHandler.bind(this) }
+    render() { return (<div><button onClick={this.clickHandler}>{this.state.message}</button></div>)}
+    clickHandler() { this.setState({ message: 'Good bye'}) }
+    
+4) define a function that its implementation called the algorythm, callme = () => { ... }
+    constructor(props){ super(props); this.state={message: 'Hello'};}
+    render() { return (<div><button onClick={this.clickHandler}>{this.state.message}</button></div>)}
+    clickHandler = () => { this.setState({ message: 'Good bye'}) }

@@ -1,0 +1,15 @@
+JSX
+- JAVASCRIPT XML - Extension to the javascript language syntax
+- Write XML code for elements and components
+- JSX tags have a tag name, attribute and children
+- JSX is not a necessity to write React apps
+- JSX makes your react code simpler and elegant
+- Transpile to pure js whichs is understtod by browser
+
+JSX differences
+    - Class = className
+    - for = htmlFor (labels <label htmlFor="name">Name</label> )
+    - CamelCase property naming convention
+        - onclick= onClick
+        - tabindex = tabIndex
+

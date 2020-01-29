@@ -1,0 +1,80 @@
+Properties
+
+optional info that the component can accept
+the component receive as parameter the value prop
+
+    <Greet name="Julian" />
+    -----
+    function Greet(props){
+        return <h1>{props.name}, welcome to CND</h1>
+    }
+
+it is possible to add dynamic html content as a property in a element with children:
+
+    <Greet name="Julian">
+        <p>Welcome to CND</p>
+    </Greet>
+    ------
+    function Greet(props) {
+        return (
+            <div> 
+                <h1>{props.name}, welcome to CND</h1>
+                {props.children}
+            </div>
+        )
+    }
+
+For a class component we use this.props, example:
+    class Welcome extends React.Component {
+        render() {
+            return (
+                <div>
+                    <h1>Welcome {this.props.name}</h1>
+                    {this.props.children}
+                </div>
+            )
+        }
+    }
+
+WE CANNOT ASSIGN VALUES TO ANY ATTRIBUTE OF PROPS BEAUSE THEY ARE IMMUTABLE props.name = 'Google' X bad! :(
+
+Destructuring props
+
+we could detructuring in multiple variables by applying the next code
+
+const Greet = ({name, heroName}) => {
+
+}
+
+o 
+
+const {name, heroName} = this.props
+
+Method as props
+
+You can send a function as a property to the children components
+
+    class ParentComponent extends Component{
+        construtor(props) { super(props); this.state = {name : 'Parent'}; this.parentHandler = this.parentHandler.bind(this); }
+        parentHandler() { alert(`Hello from ${this.state.name}`)}
+        render(){ return (<div><ChildComponent greetHandler={this.parentHandler}</div>)}
+    }
+
+    class ChildComponent extends Component {
+        construtor(props) { super(props); }
+        render() { return (<div><button onClick={this.props.greetHandler}</div>)}
+    }
+
+Also we can pass parameters by using arrow function in the statement event, () => this.props.myFunction(myParameter)
+
+     class ParentComponent extends Component{
+        construtor(props) { super(props); this.state = {name : 'Parent'}; this.parentHandler = this.parentHandler.bind(this); }
+        parentHandler(child) { alert(`Hello from ${child}`)}
+        render(){ return (<div><ChildComponent greetHandler={this.parentHandler}</div>)}
+    }
+
+    class ChildComponent extends Component {
+        construtor(props) { super(props); this.state = {name : 'Child'}; }
+        render() { return (<div><button onClick={() => this.props.greetHandler(this.state.name)}</div>)}
+    }
+

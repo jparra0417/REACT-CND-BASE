@@ -15,13 +15,18 @@ Types
         - it is a javascript function
         - receive a parameter called props
         - return  a html (JSX)
+        - Use func components as much as possible
+        - Absence of 'this' keyword
+        - Solution without using state 
+        - Mainly responsible for the UI
+        - Stateless / dumb / presentational
         - example:
             - Create a file called Greet.js in components/
                 import React from 'react';
                 function Greet(){
                     return <h1>Welcome to CND!</h1>;
                 }
-                // const Greet = () => 
+                // const Greet = () =><h1>Welcome to CND!</h1>
                 export default Greet;
             - Add the component in App.js
                 import React from 'react';
@@ -46,4 +51,45 @@ Types
                 return <h1>Hello, {this.props.name}</h1>;
             }
         }
+
+    - this is a ES6 class 
+    - More feature rich
+    - Maintain their own private data - state
+    - Complex UI Logic
+    - Provide lifecycle hooks
+    - Stateful / Smart/ Container
+    - receive props as parameter
+    - example:
+        - Create a file called Welcome.js in components/
+            import React from 'react';
+            class Welcome extends React.Component {
+                render(){
+                    return <h1>Welcome to CND!</h1>;
+                }
+            }            
+            export default Welcome;
+        - add to App.js
+            import React from 'react';
+            import './App.css';
+            import Welcome from './components/Welcome'
+            function App() {
+                return (
+                    <div className="App">
+                    <Welcome/>
+                    </div>
+                );
+            }
+            export default App;
+
+NEW FEATURE!
+
+Hooks
+    -It allows use state and other features without writing a class
+    - No breaking changes
+    - Compatible
+    - Hooks allow using stte, lifecycle methods and 'this' binding
+    
+
+
+
 

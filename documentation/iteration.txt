@@ -1,0 +1,41 @@
+Map
+
+method creates a new array with the results of calling a provided function on every element in the calling array
+
+example:
+
+var array = [1,4,9,16]
+const map1 = array.map(x => x*2)
+console.log(map1)
+// expected output array [2,8,18,32]
+
+it works with JSX
+
+render() {
+        const people = [ 
+                { name: "Bruce", age: 32 }
+                , { name: "Clark", age: 24 }
+                , { name: "Goku", age: 24 }];
+        const personList = people.map(person => <h2>I am {person.name} and I am {person.age} years old</h2>)
+        return (
+            <div>             
+                {personList}                
+            </div>
+        )
+    }
+
+however it is necessary to ad a key because react always ask for a key, it could be the index but it is an ANTI-PATTERN
+with unexpected results, it is recommendable to give a key for each row
+
+render() {
+        const people = [ 
+                { name: "Bruce", age: 32 }
+                , { name: "Clark", age: 24 }
+                , { name: "Goku", age: 24 }];
+        const personList = people.map((person, index) => <h2 key={index}>I am {person.name} and I am {person.age} years old</h2>)
+        return (
+            <div>             
+                {personList}                
+            </div>
+        )
+    }

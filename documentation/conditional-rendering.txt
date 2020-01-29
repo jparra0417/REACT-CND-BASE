@@ -1,0 +1,44 @@
+Conditional rendering
+
+1 if/else
+
+    We put use the clause if and else to render something
+        if (this.state.isLoggedIn)
+            return (
+                <div>
+                    <div>Welcome Julian!</div>             
+                </div>
+            )
+        else
+            return (
+                <div>                   
+                    <div>Welcome Guest!</div>
+                </div>
+            )
+    
+
+2 element variables
+
+    We use a variable that will change in order to print it according to the boolean result
+    
+    let message
+    if (this.state.isLoggedIn)
+        message = <div>Welcome Julian!</div>
+    else
+        message = <div>Welcome Guest!</div>
+    return (<div>{message}</div>)
+
+3 ternary conditional 
+
+    We use terniary operations
+
+    return this.state.isLoggedIn ?
+            (<div>Welcome Julian!</div>) :
+            (<div>Welcome Guest!</div>)
+
+
+
+4 short circuit
+
+    According to a boolean execute or not the statement
+            return this.state.isLoggedIn && <div>Welcome Julian</div>

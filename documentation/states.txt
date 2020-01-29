@@ -1,0 +1,121 @@
+state
+- influence what is render in the screen
+- every react component return a jsx
+
+- props vs state
+
+    props get pased to the component 
+    state is managed within the component
+
+    function parameters
+    variables declared in the function body
+
+    props are immutable
+    state can be changed
+
+    props - can be accesed by props in functional components and this.props in class components
+    state - can be accesed useState Hook inn functional components and this.state in lass component
+
+- Example
+
+    import React from 'react';
+
+    class Message extends React.Component {
+
+        constructor() {
+            super();
+            // initialize the variable state is a keyword
+            this.state = {
+                hello : 'hello',
+                message: 'Welcome visitor'
+            };
+        }
+
+        changeMessage() {
+            //  hange the state of the state
+            this.setState({
+                message: 'Thank you for subscribing'
+            });
+        }
+
+        render() {
+            return (
+                <div>
+                    <h1>{this.state.message}</h1>
+                    <div>{this.state.hello}</div>
+                    <button onClick={() => this.changeMessage()}>Subscribe</button>
+                </div>
+            )
+        }
+    }
+
+    export default Message;
+
+install the sniper es 7 react
+create a file called Counter.js
+type
+rce + tab
+
+create a constructor with rconst + tab
+
+this.state.count = this.state.count + 1;
+it will change in the variable but no in the UI
+change to
+    this.setState({
+        count: this.state.count + 1
+    });
+    console.log("Count", this.state.count);
+
+BUT, what happen? the setState is asynchronous for that reason console.log will be executed before firing the setState
+we can add a callback in order to execute something when the setState has already executed
+
+this.setState({
+    count: this.state.count + 1
+}, () => {
+    console.log("Callback value", this.state.count);
+});
+
+Change to a hard scenario
+
+    increment() {
+        this.setState({
+            count: this.state.count + 1
+        }, () => {
+            console.log("Callback value", this.state.count);
+        });
+        
+    }
+
+    incrementFive(){
+        this.increment();
+        this.increment();
+        this.increment();
+        this.increment();
+        this.increment();
+    }
+
+it only will show 1 instead of 5 because react group all setState in one in order to have a better performance
+this is something we wouldnt like to have in this scenario
+So change the implementation
+Instead of change the current object directly we send a callback with the previous state as parameter and with that we return an object
+
+// we also can receive as parameter the props
+this.setState((prevState, props) => ({
+    count: prevState.count + 1
+}), () =>{
+    console.log("Callback value", this.state.count);
+});
+
+setState
+
+- Always make use of setState and never modify directly
+- Code has to be executed after the setState execution? send a callback as second argument
+- If you prefer to update the state based on the previous state pass in a function instead of the regular object
+
+
+
+
+
+
+
+

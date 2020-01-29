@@ -1,0 +1,74 @@
+we have 4 phases
+
+Mounting -
+    When an instance of a components is being created and inserted into the DOM
+
+    Methods:
+        -constructor 
+            -> called whenever a new component is created
+            -> Initializing state
+            -> binding events
+            -> called super(props)
+            -> Directly overwrite this.state
+            -> Do not cause side effects ex HTTP Requests
+        -state getDerivedStateFromProps
+            ->the state of components dependens on changes in props
+            ->set the state
+            ->Do not cause side effect: HTTP Requests
+        -render
+            -> Only required Methods
+            -> Read props & state and return JSX
+            -> Do not change state or interact with DOM or make ajax calls
+            -> Children components lifecycle methods are also executed        
+        -componentDidMount
+            - invoked inmediayly after a componen and all its children components have been rendered
+            - Cause side effects Ex:  Interact with the dom or perform any ajax calls to load data
+            
+
+
+Updating
+    When a component is being re-rendered as a result of changes to either its props or state
+     Methods:
+        -state getDerivedStateFromProps
+            -> receive the props and state as parameter
+            -> called everytime a component is re rendered
+            -> set the state
+            -> Do not cause side effects example : HTTP
+        -shouldComponentUpdate
+            -> Dictates if the component should re render or not
+            -> prevent default behavior
+            -> performance optimization
+            -> Do not cause side effects example : HTTP
+        -render
+            -> Only required methods
+            -> read props 
+            -> Do not cause side effects example : HTTP
+        -getSnapshotBeforeUpdate
+            -> paramteres prevProps, prevState
+            -> Called right before the changes from the virtual are to be reflected
+            -> Cature some information from the DOM
+            -> return null or value , retured value will be passed as the third parameter to the next method
+        -componentDidUpdate
+            -> Called after the render is finished in the re-render cycles
+            -> arguments
+                -prevProps
+                -prevState
+                -snapshot
+            -> Cause side effects
+
+
+
+
+Unmounting
+    When a component is being removed from the DOM
+
+    Methods:
+        -componentWillUnmount
+
+Error handling
+    when there is an error during rendenring
+
+    Meethods
+        - getDerivedStateFromError
+
+

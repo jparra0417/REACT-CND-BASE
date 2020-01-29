@@ -1,0 +1,37 @@
+We have 4 ways to add styles
+
+1 CSS stylesheets
+    We coul import a css style sheet to the components
+
+    import './myStyles.css'
+    class ...
+        render() { return (<div><h1 className="primary">Hola!</h1></div>) }
+
+    we could use backticks for adding more classes
+
+        render() { return (<div><h1 className={`${className} font-xl`}>Hola!</h1></div>) }
+
+2 Inline styling
+    We create a object with the css attributes with camel case
+
+    heading = {
+        fontSize : '32px',
+        color : 'blue'
+    }
+    render() {
+        return (
+            <div>
+                <h1 style={this.heading}>Inline</h1>
+            </div>
+        )
+    }
+
+3 CSS Modules
+    is avaiable react 2 or higher
+    the name of file must have as suffix module.css
+    
+    import styles from './appStyles.module.css'
+    <h2 className={styles.success}>Module</h2>
+
+
+4 CSS in JS Libraries (styled components)
