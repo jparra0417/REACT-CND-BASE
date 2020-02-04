@@ -1,0 +1,19 @@
+Fragments
+
+group of children elements without adding extra nodes in the dom
+
+In react when you want create an object you have to declare a global tag that can contain the other tags
+example:
+    return (<div><h1>Title</h1><p>Pargraph</p></div>)
+However we dont always want to declare a div that adds to the dom, we dont want add more tags in the dom
+so we include React.Fragments as a tag
+    return (<React.Fragment><h1>Title</h1><p>Pargraph</p></React.Fragment>)
+The global tag wont be rendered
+    return (<><h1>Title</h1><p>Pargraph</p></>)
+We also can use <> and </>
+
+
+
+
+
+

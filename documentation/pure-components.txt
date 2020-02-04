@@ -1,0 +1,24 @@
+We have created components that extends components
+there are components that can extend PureComponent
+
+it means that when re render a component , the component always will re render because its method shouldComponentUpdate i always true
+whereas pure component check a swallow comparison of the values that were changed
+it means that verifies if the values has the same value and the same type for primitive types
+and verify the same reference for the complex objects
+
+it avoids re render components even when the values werenot changed and it helps to the performance of application
+
+For Class components it should extend to React.PureComponent
+    class PureC extends React.PureComponent{
+        ...
+    }
+
+For function components
+    function MemoComp(props) {
+        ...
+    }
+
+    export default React.memo(MemoComp)
+
+
+

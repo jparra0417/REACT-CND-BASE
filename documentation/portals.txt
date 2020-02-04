@@ -1,0 +1,31 @@
+By default React work with an element that its id is root
+sometimes we need to have an element outside of the root
+<div id="root"></div>
+<div id="nuevo"></div>
+
+this is very useful when we want elements agnostic to the application for example
+modal, message, etc
+
+so they need to be implemented in a different element
+
+example:
+
+    import React, { Component } from 'react'
+    import ReactDOM from 'react-dom'
+
+
+    export class PortalDemo extends Component {
+        render() {
+            return ReactDOM.createPortal(
+                <div>
+                    Portals demo
+                </div>,
+                document.getElementById("portal-root")
+            )
+        }
+    }
+
+    export default PortalDemo
+
+In this case PortalDemo will be implemented on the div id = portal-root 
+

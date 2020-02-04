@@ -64,11 +64,15 @@ Unmounting
 
     Methods:
         -componentWillUnmount
+            - Method invoked inmediatle before a component is umounted
+            -Cancelling any network Requests
+            
 
 Error handling
     when there is an error during rendenring
 
     Meethods
         - getDerivedStateFromError
-
+        - componentDidCatch
+            - When there is an error it catches the error
 

@@ -28,6 +28,20 @@ export class LifecycleB extends Component {
             </div>
         )
     }
+
+    shouldComponentUpdate(){
+        console.log("LifecycleB shouldComponentUpdate")
+        return true;
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState){
+        console.log("LifecycleB getSnapshotBeforeUpdate")
+        return null;
+    }
+
+    componentDidUpdate(){
+        console.log("LifecycleB componentDidUpdate")
+    }
 }
 
 export default LifecycleB

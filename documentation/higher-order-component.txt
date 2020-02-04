@@ -1,0 +1,99 @@
+HOC
+
+we need to share common functionality in different components
+a pattern where a function akes a component as an argument and returns a new component
+
+
+const newComp = higherOrderomponent(originalComponent)
+const enhanceComp = higherOrderomponent(originalComponent)
+
+const IronMan = withSuit(TonyStark)
+
+
+We create a file js that is a functions that receive a component as parameter , add more functionality and return a new component
+example
+
+
+create component withCounter
+
+    import React from 'react'
+    const withCounter = (WrappedComponent) => {
+
+        class WithCounter extends React.Component {
+            constructor(props) {
+                super(props)
+
+                this.state = {
+                    count: 0
+                }
+            }
+
+            increment = () => {
+                this.setState(prevState => {
+                    return { count: prevState.count + 1 }
+                })
+            }
+
+            render() {
+                return <WrappedComponent count={this.state.count} increment={this.increment} />
+            }
+        }
+        return WithCounter;
+    }
+
+    export default withCounter
+
+In ClickCounter
+
+    class ClickCounter extends Component {    
+
+        render() {
+            const { count, increment } = this.props;
+            return (
+                <div>
+                    <button onClick={increment}>Clicked {count} times</button>
+                </div>
+            )
+        }
+    }
+
+    export default withCounter(ClickCounter)
+
+in HoverCounter
+
+
+    export class HoverCounter extends Component {
+
+        render() {
+            const { count, increment } = this.props
+            return (
+                <div>
+                    <h2 onMouseOver={increment}>Hovered {count} times</h2>
+                </div>
+            )
+        }
+    }
+
+    export default withCounter(HoverCounter)
+
+
+Sometimes we have some specific props for the component
+for example: name in ClickCounter
+
+    <CounterClick name="Julian">
+
+    ----
+
+    <button>{this.props.name} ! Click </button>
+
+    It doesnt work because the component has a HOC
+    To fix it we just have to add {... this.props} some parameteres in HOC
+
+    WithCounter
+
+    render() {
+            return <WrappedComponent count={this.state.count} increment={this.increment}
+                {... this.props}
+            />
+        }
+    }

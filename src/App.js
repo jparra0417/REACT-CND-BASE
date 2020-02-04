@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
-import Inline from './components/Inline';
-import Lifecycle from './components/Lifecycle';
+import PortalDemo from './components/PortalDemo';
+
+
 
 function App() {
   return (
     <div className="App">
-      <Lifecycle/>
+      <PortalDemo/>
     </div>
   );
 }
