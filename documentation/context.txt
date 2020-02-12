@@ -1,0 +1,91 @@
+Consider 3 levels
+
+ App (username)
+A B C
+  D E
+    F
+
+
+pass username to A,D and F
+
+To A pass as paremeter
+To D pass parameter to B and afterwards pass to D
+To F pass parameter to E  to D
+
+This is a tedious problem
+
+Context API
+provides a way to apss data through the component tree without having yo pss props down manually at every levels
+
+1. create the Context
+    import React, { Component } from 'react'
+
+    // create the context
+    const UserContext = React.createContext();
+
+    // define the provider
+    const UserProvider = UserContext.Provider
+    // define the consumer
+    const UserConsumer = UserContext.Consumer
+
+    export {UserProvider, UserConsumer}
+
+
+2. Provide a context value
+    - it is in charge of provide value of all descending
+     in the parent we declare the context provider
+
+        import React from 'react';
+        import './App.css';
+        import ComponentC from './components/ComponentC';
+        import { UserProvider } from './components/userContext';
+
+
+
+        function App() {
+        return (
+            <div className="App">
+            <UserProvider value="Julian">
+                <ComponentC />
+            </UserProvider>
+            </div>
+        );
+        }
+        export default App;
+
+
+3. Consume the context value
+    
+    it implements the using of the context and it returns a function
+
+
+        import React, { Component } from 'react'
+        import { UserConsumer } from './userContext'
+
+        export class ComponentF extends Component {
+            render() {
+                return (
+                    <UserConsumer>
+                        {
+                            (username) => {
+                                return <div>Hello {username}</div>
+                            }
+                        }
+                    </UserConsumer>
+                )
+            }
+        }
+
+        export default ComponentF
+
+
+default values
+
+we could passs a value
+
+    const UserContext = React.createContext("codetext");
+
+export defaul UserContext;
+
+
+

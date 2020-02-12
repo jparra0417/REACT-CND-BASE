@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import PortalDemo from './components/PortalDemo';
+import PostForm from './components/PostForm';
 
 
 
 function App() {
   return (
     <div className="App">
-      <PortalDemo/>
+      <PostForm></PostForm>
     </div>
   );
 }

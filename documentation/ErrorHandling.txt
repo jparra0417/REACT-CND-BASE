@@ -1,0 +1,80 @@
+A class component that implementes one or both of the lifecycle methods
+
+getDerivedStateFromError : is used to render a fallback UI after an error
+componentDidCatch : is used to log the error info
+
+    import React from 'react'
+
+    function Hero({name}) {
+        if(name === 'Joker')
+            throw new Error("Not a hero")
+        return (
+            <div>
+                {name}
+            </div>
+        )
+    }
+
+    export default Hero
+
+and in ErrorBoundary.js
+
+    import React, { Component } from 'react'
+
+    export class ErrorBoundary extends Component {
+        constructor(props) {
+            super(props)
+
+            this.state = {
+                hasError: false
+            }
+        }
+
+
+        static getDerivedStateFromError(error) {
+            return {
+                hasError: true
+            }
+        }
+
+        render() {
+            if (this.state.hasError)
+                return (
+                    <div>
+                        Something went wrong
+                </div>
+                )
+            return this.props.children;        
+
+        }
+    }
+
+    export default ErrorBoundary
+
+
+App.js
+
+    import React from 'react';
+    import './App.css';
+    import Hero from './components/Hero';
+    import ErrorBoundary from './components/ErrorBoundary';
+
+
+
+    function App() {
+    return (
+        <div className="App">
+        <ErrorBoundary>
+            <Hero name="Batman" />
+        </ErrorBoundary>
+        <ErrorBoundary>
+            <Hero name="Superman" />
+        </ErrorBoundary>
+        <ErrorBoundary>
+            <Hero name="Joker" />
+        </ErrorBoundary>
+        </div>
+    );
+    }
+    export default App;
+

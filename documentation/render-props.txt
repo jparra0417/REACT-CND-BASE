@@ -1,0 +1,97 @@
+we can pass functions as parameters in the props.. we can take avantadge of this in order to reuse code
+
+CounterTwo is a component that abstracts the functionalitiy of count
+
+        import React, { Component } from 'react'
+
+        export class CounterSecond extends Component {
+            constructor(props) {
+                super(props)
+
+                this.state = {
+                    count: 0
+                }
+            }
+
+            incrementCount = () => {
+                this.setState(prevState => {
+                    return { count: prevState.count + 1 }
+                })
+            }
+
+            render() {
+                return (
+                    <div>
+                        {this.props.render(this.state.count,this.incrementCount)}
+                    </div>
+                )
+            }
+        }
+
+        export default CounterSecond
+
+Click counter two is the component that will reuse the code
+
+        import React, { Component } from 'react'
+
+        export class ClickCounterTwo extends Component {
+        render() {
+            const { count, incrementCount } = this.props
+            return (
+                <div>
+                    <button onClick={incrementCount}>Click {count} times</button>
+                </div>
+            )
+        }
+        }
+
+        export default ClickCounterTwo
+
+Hover counter is other component that will reusue the code
+
+        import React, { Component } from 'react'
+
+        export class HoverCounterTwo extends Component {
+        
+
+            render() {
+                const { count, incrementCount } = this.props
+                return (
+                    <div>
+                        <h2 onMouseOver={incrementCount}>Hovered {count} times</h2>
+                    </div>
+                )
+            }
+        }
+
+        export default HoverCounterTwo
+
+Now in the app implement the code by pssing the parameter a function who will contain the logic counter
+
+            import React from 'react';
+            import './App.css';
+            import ClickCounterTwo from './components/ClickCounterTwo';
+            import HoverCounterTwo from './components/HoverCounterTwo';
+            import CounterSecond from './components/CounterSecond';
+
+
+
+            function App() {
+            return (
+                <div className="App">
+                <CounterSecond render={
+                    (count, incrementCount) => <ClickCounterTwo count={count} incrementCount={incrementCount} 
+                />} />
+
+                <CounterSecond render={
+                    (count, incrementCount) => <HoverCounterTwo count={count} incrementCount={incrementCount} 
+                />} />
+
+
+                    {/* <ClickCounterTwo></ClickCounterTwo>
+                <HoverCounterTwo></HoverCounterTwo>
+                <User name={(isLoggedIn) => isLoggedIn ? 'Julian3': 'Guest'}></User> */}
+                </div>
+                );
+            }
+            export default App;
