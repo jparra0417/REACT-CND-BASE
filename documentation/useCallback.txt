@@ -1,0 +1,84 @@
+use callback
+
+react memo
+
+when we dont want to execute all components
+we can use React.memo()
+
+so every time that props or state change, only the changes that affects the component will cause the component re execute
+but what hapende? we always will see new changes to the buttons who has a props a method because each time is creating a new reference of the method
+
+
+
+            function HookButton({handleClick, children}) {
+                console.log(`HookButton rendering ${children}`)
+                return (
+                    <button onClick={handleClick}>
+                        {children}
+                    </button>
+                )
+            }
+
+            export default React.memo(HookButton)
+
+
+        -------------------------------------------
+
+
+for that reason we can use useCallback hook
+
+useCallback
+
+is a hook that will return a memoized version of the callback function that only changes if one the dependencies has changed
+
+why??
+
+it is useful when passing callbacks to optimized child components that rely on referene quality to prevent unnecessary renders
+
+how?
+
+
+        import React, { useState, useCallback } from 'react'
+        import HookButton from './HookButton'
+        import HookText from './HookText'
+        import HookTitle from './HookTitle'
+
+        function HookParent() {
+            const [age, setAge] = useState(27)
+            const [salary, setSalary] = useState(8000)
+
+            const incrementAge = useCallback(
+                () => {
+                    setAge(age + 1)
+                },
+                [age],
+            )
+
+            const incrementSalary = useCallback(
+                () => {
+                    setSalary(salary + 250)
+                },
+                [salary],
+            )
+
+            return (
+                <div>
+                    <HookTitle></HookTitle>
+                    <HookText text="Age" count={age}></HookText>
+                    <HookButton handleClick={incrementAge}>Increment age</HookButton>
+                    <HookText text="Salary" count={salary}></HookText>
+                    <HookButton handleClick={incrementSalary} >Increment salary</HookButton>
+                </div>
+            )
+        }
+
+        export default HookParent
+
+
+
+
+
+
+
+
+

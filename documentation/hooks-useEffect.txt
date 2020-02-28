@@ -1,0 +1,151 @@
+useEffect:
+- some effects are required in the UI
+- updating he document title to the current counter value
+- let you perorm side effects in functional components
+- it is a close replacement for componentDidMoun, componentDidUpdate and ComponentWillUnmount
+
+
+    import React, {useState, useEffect} from 'react'
+
+    export default function HookEffectOne() {
+        const [count, setCount] = useState(0);
+        const increment = () => {
+            setCount(prevState => {
+                return prevState +1
+            })
+        }
+
+        useEffect(() => {
+            document.title = `Click ${count} timess` 
+        })
+
+        return (
+            <div>
+                <button onClick={increment}>Clcked {count} times</button>
+            </div>
+        )
+    }
+
+
+
+Sometimes it has a perfomance problem
+for example always the update will execute the udateCommponent
+For taht reason in  class we can validate with the previous prevState
+
+            import React, { Component } from 'react'
+
+            export class ClassEffectOne extends Component {
+                constructor(props) {
+                    super(props)
+
+                    this.state = {
+                        count: 0,
+                        name: ''
+                    }
+                }
+
+                increment = () => {
+                    this.setState((prevState) => {
+                        return { count: prevState.count + 1 }
+                    })
+                }
+
+                componentDidMount() {
+                    document.title = `Clicked ${this.state.count} times`;
+                }
+
+                componentDidUpdate(prevProps, prevState) {
+
+                    if (prevState.count !== this.state.count) {
+                        console.log("Update component")
+                        document.title = `Clicked ${this.state.count} times`;
+                    }
+                }
+                render() {
+                    return (
+                        <div>
+                            <input type="text" value={this.state.name} onChange={e => { this.setState({ name: e.target.value }) }} />
+                            <button onClick={this.increment}>
+                                Clicked {this.state.count} times
+                            </button>
+                        </div>
+                    )
+                }
+            }
+
+            export default ClassEffectOne
+
+in a hook it should be like in the useEffect we pass a second argument that defines what property will onChange
+
+    useEffect(() => {
+        console.log("updating title")
+        document.title = `Click ${count} timess`
+    }, [count])
+
+Ful example: 
+
+        import React, { useState, useEffect } from 'react'
+
+        export default function HookEffectOne() {
+            const [count, setCount] = useState(0);
+            const [name, setName] = useState('');
+
+
+            const increment = () => {
+                setCount(prevState => {
+                    return prevState + 1
+                })
+            }
+
+            useEffect(() => {
+                console.log("updating title")
+                document.title = `Click ${count} timess`
+            }, [count])
+
+            return (
+                <div>
+                    <input type="text" value={name} onChange={e => setName(e.target.value)} />
+                    <button onClick={increment}>Clicked {count} times</button>
+                </div>
+            )
+        }
+
+
+If we want that the event only execute once , we just pass the second argument empty []
+
+
+        import React, {useState, useEffect} from 'react'
+
+        export default function HookMouse() {
+            const [x , setX] = useState(0);
+            const [y , setY] = useState(0);
+
+            const logMousePosition = e => {
+                console.log("Mouse event")
+                setX(e.clientX);
+                setY(e.clientY);
+            }
+
+            useEffect(() => {
+                console.log("useEffect called")
+                window.addEventListener('mousemove', logMousePosition)
+            },[])
+
+            return (
+                <div>
+                    Hooks X - {x} Y - {y}
+                </div>
+            )
+        }
+
+f we want to remove the event when the component is being unmounting we need to return a function who will be executed when the component is destroyed
+
+    useEffect(() => {
+        console.log("useEffect called")
+        window.addEventListener('mousemove', logMousePosition)
+        return () => {
+            console.log("component unmountin")
+            window.removeEventListener('mousemove', logMousePosition);
+        }
+    },[])
+

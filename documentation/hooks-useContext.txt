@@ -1,0 +1,66 @@
+Context API
+
+App component has a tree components
+
+root
+A B C 
+  D E
+    F
+
+Our requirement is that we have to pass the name from root to A D F
+
+For A is easy because we can pass by props
+but what about if we need to pass from root to F
+
+>>> context provides a way to passs data trhough the component tree withut having to passs props down manually at every level
+
+let's work with the sde C E F
+
+we have the problem reating contexts that is very tedious
+
+        import React from 'react'
+        import { HookUserContext, ChannelContext } from './HookComponentC'
+
+
+        export default function HookComponentF() {
+            return (
+                <div>
+                    Component f
+                    <HookUserContext.Consumer>
+                        {
+                            user => {
+                                return (
+                                    <ChannelContext.Consumer>
+                                        {
+                                            channel => {
+                                                return <div>User cntext value {user}, {channel}</div>
+                                            }
+                                        }
+                                    </ChannelContext.Consumer>
+                                )
+                            }
+
+                        }
+                    </HookUserContext.Consumer>
+                </div>
+            )
+        }
+
+So the solution is to use context hooks
+
+
+            export default function HookComponentE() {
+
+                const user = useContext(HookUserContext)
+                const channel = useContext(ChannelContext)
+
+                return (
+                    <div>
+                        {user} - {channel}
+                        <HookComponentF></HookComponentF>
+                    </div>
+                )
+            }
+
+
+

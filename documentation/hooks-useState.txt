@@ -1,0 +1,109 @@
+Only call hooks at the top level , dont call hooks inside lopps, conditions, or nested functions
+Only call hooks from react functions
+cll the from within reat functional components
+
+HookCounter
+
+    import React, { useState } from 'react'
+
+    export default function HookCounter() {
+
+        const [count, setCount] = useState(0)
+
+        return (
+            <div>
+                <button onClick={() => setCount(count + 1)}>
+                    Count {count}
+                </button>
+            </div>
+        )
+    }
+
+HookCounter with prevCount
+
+    import React, { useState } from 'react'
+
+    export default function HookCounterTwo() {
+        const initialCount = 0;
+        const [count, setCount] = useState(initialCount);
+
+        const incrementFive = () => {
+            for (let index = 0; index < 5; index++) {
+                setCount(prevCount => prevCount + 1)
+            }
+        }
+        return (
+            <div>
+                Count : {count}
+                <button onClick={() => setCount(initialCount)}>Reset</button>
+                <button onClick={() => setCount(prevCount => prevCount + 1)}>Increment</button>
+                <button onClick={() => setCount(prevCount => prevCount - 1)}>Decrement</button>
+                <button onClick={incrementFive}>Increment 5</button>
+            </div>
+        )
+    }
+
+set objects
+
+    import React, { useState } from 'react'
+
+    export default function HookCounterThree() {
+
+        const [state, setstate] = useState({ firstName: '', lastName: '' })
+        return (
+            <form>
+                <input type="text" placeholder="First Name"
+                    value={state.firstName}
+                    onChange={e => setstate({ ...state, firstName: e.target.value })} />
+                <input type="text" placeholder="Last Name"
+                    value={state.lastName}
+                    onChange={e => setstate({ ...state, lastName: e.target.value })} />
+                <h2>Your first name is {state.firstName}</h2>
+                <h2>Your last name is {state.lastName}</h2>
+                <h2>{JSON.stringify(state)}</h2>
+            </form>
+        )
+    }
+
+    ...state is for spreading all attributes of the bject and onl modify what we were interested on
+
+
+use array
+
+    import React, { useState } from 'react'
+
+    export default function HookCounterFour() {
+
+        const [items, setItems] = useState([]);
+
+        const addItem = () => {
+            setItems([...items, {
+                id: items.length,
+                value: Math.floor(Math.random() * 10) + 1
+            }])
+        }
+
+        return (
+            <div>
+                <button onClick={addItem}>Add a number</button>
+                <ul>
+                    {
+                        items.map(
+                            item => (
+                                <li key={item.id}>{item.value}</li>
+                            )
+                        )
+                    }
+                </ul>
+            </div>
+        )
+    }
+
+Summary use state
+- The usestate hook lets you add state to functional components
+- In classes, the state is always an objects
+- With the seState hook, the state doesnt have to be an objects
+- the usestate hook returns an array with 2 elements
+- the first element is the current value of the state, and the second element is a state setter function
+- new state value depends on the previos state value' you can pass a function to the setter function
+- nwhen dealing with object or arrays, always make sure to spread your state variable and then call the setter funtion

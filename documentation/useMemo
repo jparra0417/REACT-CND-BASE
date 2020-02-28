@@ -1,0 +1,61 @@
+usememo
+
+
+perfomrance is important and for xample in this app either button 1 or button 2 it will execute the function isEven
+
+
+
+                const isEven = () => {
+                    console.log("isEven")
+                    let i = 0;
+                    while(i < 2000000000) i++;
+                    return countOne % 2 === 0
+                }
+
+
+                return (
+                    <div>
+                        <div>
+                            <button onClick={incrementOne}>Increment One : {countOne}</button>
+                            <span>{isEven() ? 'Even' : 'Odd'}</span>
+                        </div>
+                        <div>
+                            <button onClick={incrementTwo}>Increment Two : {countTwo}</button>
+                        </div>
+                    </div>
+                )
+            }
+
+
+we need use memo
+
+            const isEven = useMemo(() => {
+                    console.log("isEven")
+                    let i = 0;
+                    while(i < 2000000000) i++;
+                    return countOne % 2 === 0
+                }, [countOne])
+
+                const incrementOne = () => {
+                    setCountOne(countOne + 1)
+                }
+
+                const incrementTwo = () => {
+                    setCountTwo(countTwo + 1)
+                }
+
+                
+
+
+                return (
+                    <div>
+                        <div>
+                            <button onClick={incrementOne}>Increment One : {countOne}</button>
+                            <span>{isEven ? 'Even' : 'Odd'}</span>
+                        </div>
+                        <div>
+                            <button onClick={incrementTwo}>Increment Two : {countTwo}</button>
+                        </div>
+                    </div>
+                )
+So when the countOne is changed it will execute isEven other case wouldnt execute
