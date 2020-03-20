@@ -1,0 +1,6 @@
+escenario 
+
+app three components
+we can passs the parameters by using reducer and context
+
+
