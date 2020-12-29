@@ -35,7 +35,7 @@ create component withCounter
             }
 
             render() {
-                return <WrappedComponent count={this.state.count} increment={this.increment} />
+                
             }
         }
         return WithCounter;
